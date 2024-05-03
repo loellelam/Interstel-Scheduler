@@ -14,20 +14,28 @@ class Grid:
         self.draw_grid()
 
     def draw_grid(self):
-        # Read data from JSON file
         with open('data.json', 'r') as file:
             data = json.load(file)
         
-        # Create rows
-        for i in range(0, 220, 20):
-            self.canvas.create_line(0, i, 1000, i, fill="gray", tags="gridline")
+        # Custom row and column dimensions
+        map_height = 100
+        date_colheight = map_height + 80
+        time_colheight = date_colheight + 80
+        label_rowwidth = 80
 
+        self.canvas.create_line(0, 0, 1000, 0, fill="gray", tags="gridline") # top row
+        self.canvas.create_line(0, map_height, 1000, map_height, fill="gray", tags="map") # map
+        self.canvas.create_line(0, date_colheight, 1000, date_colheight, fill="gray", tags="utc") # date
+        self.canvas.create_line(0, time_colheight, 1000, time_colheight, fill="gray", tags="utc") # time
+        self.canvas.create_line(label_rowwidth, 0, label_rowwidth, time_colheight+200, fill="gray", tags="label") # label column
+
+        # Create rows
+        for i in range(time_colheight, time_colheight+220, 20):
+            self.canvas.create_line(0, i, 1000, i, fill="gray", tags="gridline")
         
-        # Draw grid on the canvas based on the data
-        # Example code to draw a grid columns
-        header_width = 80
-        for i in range(header_width, 1000, 20): 
-            self.canvas.create_line(i, 0, i, 200, fill="gray", tags="gridline")
+        # Create columns
+        for i in range(label_rowwidth, 1000, 20): 
+            self.canvas.create_line(i, time_colheight, i, time_colheight+200, fill="gray", tags="gridline")
             
         # Adjust scroll region based on the actual size of the grid
         self.canvas.config(scrollregion=self.canvas.bbox("all"))

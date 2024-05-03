@@ -6,7 +6,7 @@ def main():
     # Initialize Tk class
     root = tk.Tk()
     root.title("Scheduler")
-    root.geometry("800x300")
+    root.geometry("800x600")
 
     # Add grid widget
     app = Grid(root)

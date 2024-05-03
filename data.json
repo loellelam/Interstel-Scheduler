@@ -1,0 +1,27 @@
+[
+    {
+        "start-datetime": "2024-05-01T08:00:00",
+        "end-datetime": "2024-05-01T10:00:00",
+        "gs-number": 5
+    },
+    {
+        "start-datetime": "2024-05-01T09:00:00",
+        "end-datetime": "2024-05-01T11:30:00",
+        "gs-number": 8
+    },
+    {
+        "start-datetime": "2024-05-01T11:00:00",
+        "end-datetime": "2024-05-01T13:00:00",
+        "gs-number": 4
+    },
+    {
+        "start-datetime": "2024-05-01T14:00:00",
+        "end-datetime": "2024-05-01T16:30:00",
+        "gs-number": 7
+    },
+    {
+        "start-datetime": "2024-05-01T15:00:00",
+        "end-datetime": "2024-05-01T17:30:00",
+        "gs-number": 9
+    }
+]

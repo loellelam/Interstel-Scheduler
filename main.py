@@ -1,15 +1,16 @@
 import tkinter as tk
 
-from grid import Grid
+from widgets.grid import Grid
 
 def main():
     # Initialize Tk class
     root = tk.Tk()
     root.title("Scheduler")
-    root.geometry("800x600")
+    root.geometry("800x600") # window size
 
-    # Add grid widget
-    app = Grid(root)
+    # Add widgets
+    grid = Grid(root)
+
 
     # Display program
     root.mainloop()

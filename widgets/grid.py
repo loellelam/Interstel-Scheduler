@@ -1,5 +1,4 @@
 import tkinter as tk
-import json
 
 class Grid:
     def __init__(self, master):
@@ -14,9 +13,6 @@ class Grid:
         self.draw_grid()
 
     def draw_grid(self):
-        with open('data.json', 'r') as file:
-            data = json.load(file)
-        
         # Custom row and column dimensions
         map_height = 100
         date_colheight = map_height + 80
@@ -27,7 +23,7 @@ class Grid:
         self.canvas.create_line(0, map_height, 1000, map_height, fill="gray", tags="map") # map
         self.canvas.create_line(0, date_colheight, 1000, date_colheight, fill="gray", tags="utc") # date
         self.canvas.create_line(0, time_colheight, 1000, time_colheight, fill="gray", tags="utc") # time
-        self.canvas.create_line(label_rowwidth, 0, label_rowwidth, time_colheight+200, fill="gray", tags="label") # label column
+        self.canvas.create_line(label_rowwidth, 0, label_rowwidth, time_colheight+200, fill="gray", tags="label") # header column
 
         # Create rows
         for i in range(time_colheight, time_colheight+220, 20):
@@ -39,5 +35,3 @@ class Grid:
             
         # Adjust scroll region based on the actual size of the grid
         self.canvas.config(scrollregion=self.canvas.bbox("all"))
-
-       

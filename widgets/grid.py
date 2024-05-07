@@ -45,7 +45,7 @@ class Grid:
         self.canvas.create_text(40, 10 + time_colheight, text="Umbra", fill="white")
         self.canvas.create_text(40, 30 + time_colheight, text="Orbital Events", fill="white")
 
-        # fill in the rest of the labels
+        # fill in the ground station labels
         start = 30
         row_label = 1
         for row in range(time_colheight, time_colheight+160, 20):
@@ -53,10 +53,13 @@ class Grid:
             self.canvas.create_text(40, start + time_colheight, text="GS"+str(row_label), fill="white")
             row_label += 1
 
+        colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange"]
+
         # Fill in data
-        for row in range(num_rows):  # Example: 5 rows
-            for col in range(num_cols):  # Example: 5 columns
-                cell_color = "white"
+        for row in range(num_rows):  # iterate through rows
+            cell_color = colors[row]
+            for col in range(num_cols):  # iterate through columns
+                #cell_color = "white"
                 x0 = label_rowwidth + col * 20  # Starting x-coordinate for the cell
                 y0 = time_colheight + row * 20  # Starting y-coordinate for the cell
                 x1 = x0 + 20  # Ending x-coordinate for the cell

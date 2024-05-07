@@ -25,22 +25,37 @@ class Grid:
         self.canvas.create_line(0, time_colheight, 1000, time_colheight, fill="gray", tags="utc") # time
         self.canvas.create_line(label_rowwidth, 0, label_rowwidth, time_colheight+200, fill="gray", tags="label") # header column
 
+        num_rows = -1
         # Create rows
         for i in range(time_colheight, time_colheight+220, 20):
             self.canvas.create_line(0, i, 1000, i, fill="gray", tags="gridline")
+            num_rows += 1
         
+        num_cols = 0
         # Create columns
         for i in range(label_rowwidth, 1000, 20): 
             self.canvas.create_line(i, time_colheight, i, time_colheight+200, fill="gray", tags="gridline")
+            num_cols += 1
 
-        cell_data = f"Map"
-        self.canvas.create_text(40, map_height/2, text=cell_data, fill="white")
+        # fill in labels
+        self.canvas.create_text(40, map_height/2, text="Map", fill="white")
         self.canvas.create_text(40, (date_colheight/2) + (map_height/2), text="UTC Date", fill="white")
         self.canvas.create_text(40, (time_colheight/2) +(date_colheight/2), text="UTC Time", fill="white")
+        
+        self.canvas.create_text(40, 10 + time_colheight, text="Umbra", fill="white")
+        self.canvas.create_text(40, 30 + time_colheight, text="Orbital Events", fill="white")
+
+        # fill in the rest of the labels
+        start = 30
+        row_label = 1
+        for row in range(time_colheight, time_colheight+160, 20):
+            start = start + 20
+            self.canvas.create_text(40, start + time_colheight, text="GS"+str(row_label), fill="white")
+            row_label += 1
 
         # Fill in data
-        for row in range(5):  # Example: 5 rows
-            for col in range(5):  # Example: 5 columns
+        for row in range(num_rows):  # Example: 5 rows
+            for col in range(num_cols):  # Example: 5 columns
                 cell_color = "white"
                 x0 = label_rowwidth + col * 20  # Starting x-coordinate for the cell
                 y0 = time_colheight + row * 20  # Starting y-coordinate for the cell

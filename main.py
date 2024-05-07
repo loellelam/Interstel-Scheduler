@@ -11,9 +11,6 @@ def main():
     # Add widgets
     grid = Grid(root)
 
-    l1 = tk.Label(root, text = "Test: ")
-    # l1.grid(row = 1, column = 0)
-
     # Display program
     root.mainloop()
 

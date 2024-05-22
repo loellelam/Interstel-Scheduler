@@ -47,16 +47,14 @@ class Grid:
         self.canvas.create_text(left_padding, 30 + time_colheight, text="Orbital Events", fill="white")
 
         # fill in the ground station headers
-        start = 30
-        row_header = 1
-        for row in range(time_colheight, time_colheight+160, 20):
-            start = start + 20
-            self.canvas.create_text(left_padding, start + time_colheight, text="GS"+str(row_header), fill="white")
-            row_header += 1
-
-        colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange"]
+        gs_names = ["MC3-NPS", "MC3-PCH", "KSAT-PA", "KSAT-PL", "KSAT-NZ"]
+        gs_start = 50 + time_colheight
+        gs_rowheight = 20
+        for row in range(len(gs_names)):
+            self.canvas.create_text(left_padding, gs_start + gs_rowheight*row, text=gs_names[row], fill="white")
 
         # Fill in data
+        colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange"]
         for row in range(num_rows):  # iterate through rows
             cell_color = colors[row]
             for col in range(num_cols):  # iterate through columns

@@ -1,5 +1,7 @@
 import tkinter as tk
 
+from read_data import read_data
+
 class Grid:
     def __init__(self, master):
         self.master = master
@@ -64,6 +66,15 @@ class Grid:
                 x1 = x0 + 20  # Ending x-coordinate for the cell
                 y1 = y0 + 20  # Ending y-coordinate for the cell
                 self.canvas.create_rectangle(x0, y0, x1, y1, fill=cell_color)
-                
+        
+        data = read_data('ground_contacts.csv')
+        # for contact in data:
+        #     utc = contact['utc']
+        #     hst = contact['hst']
+        #     gs_id = contact['GS id']
+        #     orbital_events = contact['orbital events']
+        #     self.canvas.create_text(100, 100, text=f"{utc}, {hst}, {gs_id}, {orbital_events}", fill="white")
+
+
         # Adjust scroll region based on the actual size of the grid
         self.canvas.config(scrollregion=self.canvas.bbox("all"))

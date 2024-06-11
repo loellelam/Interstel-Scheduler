@@ -2,40 +2,41 @@ from datetime import datetime
 from datetime import timezone
 import json
 
-# open JSON file
-file = open('data.json')
+def read_json():
+    # open JSON file
+    file = open('data.json')
 
-# return JSON object as a dictionary
-data = json.load(file)
+    # return JSON object as a dictionary
+    data = json.load(file)
 
-# create empty list to hold gs ids
-list = []
+    # create empty list to hold gs ids
+    list = []
 
-for i in data:
-    utc = i['utc']
-    date = datetime.fromisoformat(utc[:-1]).astimezone(timezone.utc)
-    # print(date)
+    for i in data:
+        utc = i['utc']
+        date = datetime.fromisoformat(utc[:-1]).astimezone(timezone.utc)
+        # print(date)
 
-    gs_id = i['gs-id']
-    # print(gs_id)
+        gs_id = i['gs-id']
+        # print(gs_id)
 
-    orb_event = i['orbital-event']
-    # print(orb_event)
+        orb_event = i['orbital-event']
+        # print(orb_event)
 
-    if gs_id not in list:
-        list.append(gs_id)
+        if gs_id not in list:
+            list.append(gs_id)
 
-    # print()
+        # print()
 
-print(list)
+    print(list)
 
-# datetime.fromisoformat()
- 
-file.close()
+    # datetime.fromisoformat()
+    
+    file.close()
 
-# read in gs-id
-# check if gs-id has been saved before or not
-# if new gs-id, save as new one in list/vector idk(?)
-# if not, bring up saved gs-id from list/vector(?)
+    # read in gs-id
+    # check if gs-id has been saved before or not
+    # if new gs-id, save as new one in list/vector idk(?)
+    # if not, bring up saved gs-id from list/vector(?)
 
-# finding length of time: find where each AOS0 starts
+    # finding length of time: find where each AOS0 starts

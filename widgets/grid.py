@@ -2,6 +2,7 @@ import tkinter as tk
 from datetime import datetime, timedelta
 
 from read_data import read_data
+from read_json import read_json
 
 # Global variables
 # Custom row and column dimensions
@@ -15,6 +16,12 @@ time_height = 80
 date_y = map_height
 time_y = map_height + date_height
 events_y = map_height + date_height + time_height
+
+########################################
+# save start and end time from json file
+start_time = 0
+end_time = 0
+########################################
 
 # Initial grid size
 num_rows = 7
@@ -61,7 +68,11 @@ class Grid:
         self.canvas.create_text(header_width/2, events_y + cell_size*1.5, text="Orbital Events", fill="white")
 
         # Fill in the ground station headers
-        gs_names = ["MC3-NPS", "MC3-PCH", "KSAT-PA", "KSAT-PL", "KSAT-NZ"]
+        # gs_names = ["MC3-NPS", "MC3-PCH", "KSAT-PA", "KSAT-PL", "KSAT-NZ"]
+        # create empty list for gs names
+        name_list = []
+        # fill in list with gs names
+        gs_names = read_json(name_list)
         gs_start = events_y + cell_size * 2.5 # .5 to vertically center text
         for i in range(len(gs_names)):
             self.canvas.create_text(header_width/2, gs_start + cell_size*i, text=gs_names[i], fill="white")

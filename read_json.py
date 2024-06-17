@@ -2,15 +2,12 @@ from datetime import datetime
 from datetime import timezone
 import json
 
-def read_json():
+def read_json(list):
     # open JSON file
     file = open('data.json')
 
     # return JSON object as a dictionary
     data = json.load(file)
-
-    # create empty list to hold gs ids
-    list = []
 
     for i in data:
         utc = i['utc']
@@ -26,13 +23,14 @@ def read_json():
         if gs_id not in list:
             list.append(gs_id)
 
-        # print()
-
+    # print list of gs ids
     print(list)
-
-    # datetime.fromisoformat()
     
+    # close json file
     file.close()
+
+    # return list of gs ids
+    return list
 
     # read in gs-id
     # check if gs-id has been saved before or not

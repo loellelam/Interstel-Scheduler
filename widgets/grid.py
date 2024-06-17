@@ -1,8 +1,7 @@
 import tkinter as tk
 from datetime import datetime, timedelta
 
-from read_data import read_data
-from read_json import read_json
+from read_json import ReadJson
 
 # Global variables
 # Custom row and column dimensions
@@ -82,12 +81,12 @@ class Grid:
         for row in range(num_rows):  # iterate through rows
             cell_color = colors[row]
             for col in range(num_cols):  # iterate through columns
-                 #cell_color = "white"
-                 x0 = header_width + col * 20  # Starting x-coordinate for the cell
-                 y0 = events_y + row * 20  # Starting y-coordinate for the cell
-                 x1 = x0 + 20  # Ending x-coordinate for the cell
-                 y1 = y0 + 20  # Ending y-coordinate for the cell
-                 self.canvas.create_rectangle(x0, y0, x1, y1, fill=cell_color)
+                #cell_color = "white"
+                x0 = header_width + col * 20  # Starting x-coordinate for the cell
+                y0 = events_y + row * 20  # Starting y-coordinate for the cell
+                x1 = x0 + 20  # Ending x-coordinate for the cell
+                y1 = y0 + 20  # Ending y-coordinate for the cell
+                self.canvas.create_rectangle(x0, y0, x1, y1, fill=cell_color)
         
         # Adjust scroll region based on the actual size of the grid, remove for infinite scroll
         self.canvas.config(scrollregion=self.canvas.bbox("all"))

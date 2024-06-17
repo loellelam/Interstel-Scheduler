@@ -71,7 +71,8 @@ class Grid:
         # create empty list for gs names
         name_list = []
         # fill in list with gs names
-        gs_names = read_json()
+        gs_names = ReadJson.getEventName(name_list)
+
         gs_start = events_y + cell_size * 2.5 # .5 to vertically center text
         for i in range(len(gs_names)):
             self.canvas.create_text(header_width/2, gs_start + cell_size*i, text=gs_names[i], fill="white")
@@ -110,4 +111,4 @@ class Grid:
         #     gs_id = contact['GS id']
         #     orbital_events = contact['orbital events']
         #     self.canvas.create_text(100, 100, text=f"{utc}, {hst}, {gs_id}, {orbital_events}", fill="white")
-        print("hi")
+        print("populate_data called")

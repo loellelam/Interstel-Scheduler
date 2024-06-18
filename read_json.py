@@ -3,7 +3,7 @@ from datetime import timezone
 import json
 
 class ReadJson:
-    def read_json(list):
+    def read_json():
         # open JSON file
         file = open('data.json')
 
@@ -24,7 +24,7 @@ class ReadJson:
         #     if gs_id not in list:
         #         list.append(gs_id)
 
-        # # print list of gs ids
+        # print list of gs ids
         # print(list)
         
         # close json file
@@ -40,8 +40,41 @@ class ReadJson:
 
         # # finding length of time: find where each AOS0 starts
     
-    def getEventName():
-        return
+    def getEventName(list):
+        # open JSON file
+        file = open('data.json')
+
+        # return JSON object as a dictionary
+        data = json.load(file)
+
+        # iterate through JSON file
+        for i in data:
+                # read in event name
+                event_name = i['event_name']
+                # save elements of event name in list
+                name = event_name.split("_", 1)
+
+                if (name[0] != "UMBRAIN" and name[0] != "UMBRAOUT"):
+                    # check if new event name
+                    # if new, add to list
+                    if name[1] not in list:
+                        list.append(name[1])
+
+        # print list of event names
+        print(list)
+
+        # close JSON file
+        file.close()
+
+        # return list of event names
+        return list
 
     def getUtc():
+        return
+    
+    def findPairs():
+        # find pairs (umbra in, umbra out)/(aos, los)
+
+        # find umbra pairs
+
         return

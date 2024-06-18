@@ -24,7 +24,7 @@ class ReadJson:
         #     if gs_id not in list:
         #         list.append(gs_id)
 
-        # # print list of gs ids
+        # print list of gs ids
         # print(list)
         
         # close json file
@@ -51,14 +51,17 @@ class ReadJson:
         for i in data:
                 # read in event name
                 event_name = i['event_name']
+                # save elements of event name in list
+                name = event_name.split("_", 1)
 
-                # check if new event name
-                # if new, add to list
-                if event_name not in list:
-                    list.append(event_name)
+                if (name[0] != "UMBRAIN" and name[0] != "UMBRAOUT"):
+                    # check if new event name
+                    # if new, add to list
+                    if name[1] not in list:
+                        list.append(name[1])
 
         # print list of event names
-        print(list)
+        # print(list)
 
         # close JSON file
         file.close()

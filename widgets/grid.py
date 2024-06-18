@@ -2,6 +2,8 @@ import tkinter as tk
 from datetime import datetime, timedelta
 
 from read_json import ReadJson
+ReadJson.read_json()
+ReadJson.get_event_utc()
 
 # Global variables
 # Custom row and column dimensions
@@ -104,10 +106,14 @@ class Grid:
         #     self.canvas.create_text(header_width + i*cell_size, time_y + time_height/2, text=rounded_time.strftime('%H:%M:%S'), fill="white", angle=90) 
         #     rounded_time = rounded_time + timedelta(minutes=increment)
         
+        # Populate umbra events
+        umbra = ReadJson.get_umbra_utc()
+        print(umbra["in"][0])
+
         # for contact in data:
         #     utc = contact['utc']
         #     hst = contact['hst']
         #     gs_id = contact['GS id']
         #     orbital_events = contact['orbital events']
         #     self.canvas.create_text(100, 100, text=f"{utc}, {hst}, {gs_id}, {orbital_events}", fill="white")
-        print("hi")
+        

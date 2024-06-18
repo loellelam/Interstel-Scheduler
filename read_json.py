@@ -3,12 +3,15 @@ from datetime import timezone
 import json
 
 class ReadJson:
-    def read_json(list):
+    data = []
+
+    @classmethod
+    def read_json(cls):
         # open JSON file
         file = open('data.json')
 
         # return JSON object as a dictionary
-        data = json.load(file)
+        cls.data = json.load(file)
 
         # for i in data:
         #     utc = i['utc']
@@ -40,8 +43,28 @@ class ReadJson:
 
         # # finding length of time: find where each AOS0 starts
     
+    @classmethod
     def getEventName():
         return
+    
+    @classmethod
+    def get_event_utc(cls):
+        for i, event in enumerate(cls.data):
+            mjd = event["event_utc"]  
+            unix = mjd - 40587 * 86400
+            cls.data[i]["event_utc"] = int(unix)
+                    
+    @classmethod
+    def get_umbra_utc(cls):
+        umbra = {
+            "in": [],
+            "out": []
+        }
 
-    def getUtc():
-        return
+        for event in cls.data:
+            if (event["event_name"] == "UMBRAIN"):
+                umbra["in"].append(event["event_utc"])
+            if (event["event_name"] == "UMBRAOUT"):
+                umbra["out"].append(event["event_utc"])
+
+        return umbra

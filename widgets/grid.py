@@ -23,7 +23,7 @@ end_time = 0
 ########################################
 
 # Initial grid size
-num_rows = 7
+num_rows = 12
 num_cols = 40
 max_x = header_width + num_cols * cell_size
 max_y = events_y + num_rows * cell_size
@@ -78,7 +78,7 @@ class Grid:
             self.canvas.create_text(header_width/2, gs_start + cell_size*i, text=gs_names[i], fill="white")
 
         # Fill in data
-        colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange"]
+        colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange", "yellow", "green"]
         for row in range(num_rows):  # iterate through rows
             cell_color = colors[row]
             for col in range(num_cols):  # iterate through columns

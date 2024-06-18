@@ -61,7 +61,7 @@ class ReadJson:
                         list.append(name[1])
 
         # print list of event names
-        # print(list)
+        print(list)
 
         # close JSON file
         file.close()
@@ -70,4 +70,11 @@ class ReadJson:
         return list
 
     def getUtc():
+        return
+    
+    def findPairs():
+        # find pairs (umbra in, umbra out)/(aos, los)
+
+        # find umbra pairs
+
         return

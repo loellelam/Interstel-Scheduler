@@ -1,5 +1,6 @@
 from datetime import datetime
 from datetime import timezone
+from collections import namedtuple
 import json
 
 class ReadJson:
@@ -68,13 +69,52 @@ class ReadJson:
 
         # return list of event names
         return list
-
-    def getUtc():
-        return
     
+    # find aos/los pairs
     def findPairs():
+        # initialize list to hold aos/los pairs
+        pairs = []
+
+        # open JSON file
+        file = open('data.json')
+
+        # return JSON object as a dictionary
+        data = json.load(file)
+
+        # iterate through JSON file
         # find pairs (umbra in, umbra out)/(aos, los)
+        for i in data:
+            print("in for loop")
+
+        # create named tuples for events
 
         # find umbra pairs
 
-        return
+        # close JSON file
+        file.close()
+
+        # return list of aos/los pairs
+        return pairs
+    
+    # from loelle's work
+    @classmethod
+    def get_event_utc(cls):
+        for i, event in enumerate(cls.data):
+            mjd = event["event_utc"]  
+            unix = mjd - 40587 * 86400
+            cls.data[i]["event_utc"] = int(unix)
+                    
+    @classmethod
+    def get_umbra_utc(cls):
+        umbra = {
+            "in": [],
+            "out": []
+        }
+
+        for event in cls.data:
+            if (event["event_name"] == "UMBRAIN"):
+                umbra["in"].append(event["event_utc"])
+            if (event["event_name"] == "UMBRAOUT"):
+                umbra["out"].append(event["event_utc"])
+
+        return umbra

@@ -3,6 +3,16 @@ from datetime import timezone
 from collections import namedtuple
 import json
 
+class Event:
+    def __init__(self):
+        self.event_flag = -1
+        self.event_name = ""
+        self.event_type = -1
+        self.event_utc = -1
+        self.start_time = -1
+        self.end_time = -1
+        self.max_time = -1
+
 class ReadJson:
     def read_json():
         # open JSON file
@@ -50,16 +60,16 @@ class ReadJson:
 
         # iterate through JSON file
         for i in data:
-                # read in event name
-                event_name = i['event_name']
-                # save elements of event name in list
-                name = event_name.split("_", 1)
+            # read in event name
+            event_name = i['event_name']
+            # save elements of event name in list
+            name = event_name.split("_", 1)
 
-                if (name[0] != "UMBRAIN" and name[0] != "UMBRAOUT"):
-                    # check if new event name
-                    # if new, add to list
-                    if name[1] not in list:
-                        list.append(name[1])
+            if (name[0] != "UMBRAIN" and name[0] != "UMBRAOUT"):
+                # check if new event name
+                # if new, add to list
+                if name[1] not in list:
+                    list.append(name[1])
 
         # print list of event names
         print(list)
@@ -84,7 +94,37 @@ class ReadJson:
         # iterate through JSON file
         # find pairs (umbra in, umbra out)/(aos, los)
         for i in data:
-            print("in for loop")
+            # read in event name
+            event_name = i['event_name']
+
+            # look for starting aos
+            if'AOS' in event_name:
+                print("AOS: " + event_name)
+
+                # find and save location of event
+                name = event_name.split("_", 1)
+                name = name[1]
+                print("AOS name: " + name)
+
+                # declare new named tuple 
+                newEvent = namedtuple(name, ['AOS', 'LOS'])
+                # create new event
+                E = newEvent(0, 1)
+                # add event into pairs list
+                pairs.extend(E)
+                print(E)
+
+            # look for ending los
+            if 'LOS' in event_name:
+                print()
+                # print("LOS: " + event_name)
+
+            # look for max
+            if 'MAX' in event_name:
+                print()
+                # print("MAX: " + event_name)
+
+            # once aos found, find the event name
 
         # create named tuples for events
 

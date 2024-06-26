@@ -135,7 +135,7 @@
       "event_flag": 0,
       "event_name": "UMBRAIN",
       "event_type": 4614,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 529448.91108738538,
           "lat": -0.27649920576395798,
@@ -377,7 +377,7 @@
       "event_flag": 0,
       "event_name": "UMBRAIN",
       "event_type": 4614,
-      "event_utc": 0,
+      "event_utc": 60107.080011574079,
       "geodpos": {
           "h": 529487.49666859303,
           "lat": -0.27745699038913929,

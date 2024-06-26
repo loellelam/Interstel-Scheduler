@@ -41,7 +41,7 @@ time_increment = 30 # 30 minute increments
 
 # Initial grid size
 num_rows = 7
-num_cols = 40
+num_cols = (int((end_time - start_time).total_seconds() / 60) // 5) + 1 # the number of 5-min increments
 max_x = header_width + num_cols * cell_size
 max_y = events_y + num_rows * cell_size
 ################################################################################

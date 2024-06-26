@@ -59,6 +59,7 @@ class ReadJson:
         for event in cls.data:
             if (event["event_utc"] < min):
                 min = event["event_utc"]
+        min = 1686524321.0012758 # TEMPORARILY USED FOR TESTING
         return min
     
     @classmethod

@@ -121,9 +121,7 @@ class Grid:
         
         # Populate umbra events
         umbra_times = ReadJson.get_umbra_utc()
-        for umbra_time in umbra_times["in"]:
-            x_position = unix_to_x_pos(umbra_time)
-            self.canvas.create_rectangle(x_position + 1, events_y + 1, x_position + 50, events_y + cell_size - 1, fill="gray")            
-        
-
-
+        for i in range(0, len(umbra_times["in"])):
+            start = unix_to_x_pos(umbra_times["in"][i])
+            end = unix_to_x_pos(umbra_times["out"][i])
+            self.canvas.create_rectangle(start + 1, events_y + 1, end - 1, events_y + cell_size - 1, fill="gray")

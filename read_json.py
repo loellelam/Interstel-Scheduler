@@ -85,6 +85,9 @@ class ReadJson:
         # initialize list to hold aos/los pairs
         pairs = []
 
+        # define named tuple to hold the events
+        Event = namedtuple('Event', ['name', 'AOS', 'MAX', 'LOS'])
+
         # open JSON file
         file = open('data.json')
 
@@ -106,16 +109,26 @@ class ReadJson:
                 name = name[1]
                 print("AOS name: " + name)
 
-                # declare new named tuple 
-                newEvent = namedtuple(name, ['AOS', 'LOS'])
-                # create new event
-                E = newEvent(0, 1)
+                # create new event and save it's AOS
+                E = Event(name, i['event_utc'], None, None)
                 # add event into pairs list
-                pairs.extend(E)
+                pairs.append(E)
                 print(E)
+                print()
 
             # look for ending los
             if 'LOS' in event_name:
+                # find and save location of event
+                name = event_name.split("_", 1)
+                name = name[1]
+                print("LOS name: " + name)
+
+                for index, event in enumerate(pairs):
+                    if event.name == name and event.LOS is None:
+                        pairs[index] = event._replace(LOS = i['event_utc'])
+                        print(pairs[index])
+                        break
+
                 print()
                 # print("LOS: " + event_name)
 
@@ -129,6 +142,8 @@ class ReadJson:
         # create named tuples for events
 
         # find umbra pairs
+
+        print(pairs)
 
         # close JSON file
         file.close()

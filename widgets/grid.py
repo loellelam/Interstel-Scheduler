@@ -9,7 +9,6 @@ ReadJson.read_json()
 
 # Round down to the nearest 30 minutes
 def nearest_30_min(dt):
-    # return dt - timedelta(minutes=dt.minute % 30, seconds=dt.second, microseconds=dt.microsecond)
     return dt - (dt - datetime.min) % timedelta(minutes=30)
 
 # Returns x position given unix time
@@ -110,15 +109,17 @@ class Grid:
         self.canvas.config(scrollregion=self.canvas.bbox("all"))
 
     def populate_data(self):
-        # UTC Date and Time
-        self.canvas.create_text(header_width, date_y + date_height/2, text=start_time.strftime('%Y-%m-%d'), fill="white", angle=90)
-        self.canvas.create_text(header_width, time_y + time_height/2, text=start_time.strftime('%H:%M:%S'), fill="white", angle=90)
+        # Populate UTC Date and Time
+        self.canvas.create_text(header_width, date_y + date_height/2, text=start_time.strftime('%Y-%m-%d'), fill="white", angle=90) # first date
         # Label every 30 minute increment
         time_counter = start_time
         for i in range(0, max_x//cell_size, time_increment//5):
             self.canvas.create_text(header_width + i*cell_size, time_y + time_height/2, text=time_counter.strftime('%H:%M:%S'), fill="white", angle=90) 
+            # Label every new day
+            if time_counter.time() == datetime.min.time():  # if time is 00:00
+                self.canvas.create_text(header_width + i * cell_size, date_y + date_height / 2, text=time_counter.strftime('%Y-%m-%d'), fill="white", angle=90)
             time_counter = time_counter + timedelta(minutes=time_increment)
-        
+       
         # Populate umbra events
         umbra_times = ReadJson.get_umbra_utc()
         for i in range(0, len(umbra_times["in"])):

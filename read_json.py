@@ -42,18 +42,33 @@ class ReadJson:
         # # if not, bring up saved gs-id from list/vector(?)
 
         # # finding length of time: find where each AOS0 starts
+
+        # Convert all MJD to unix time
+        for i, event in enumerate(cls.data):
+            mjd = event["event_utc"]  
+            unix = (mjd - 40587) * 86400
+            cls.data[i]["event_utc"] = float(unix)
     
     @classmethod
     def getEventName():
-        return
+        return        
+
+    @classmethod
+    def get_start_utc(cls):
+        min = float('inf')
+        for event in cls.data:
+            if (event["event_utc"] < min):
+                min = event["event_utc"]
+        return min
     
     @classmethod
-    def get_event_utc(cls):
-        for i, event in enumerate(cls.data):
-            mjd = event["event_utc"]  
-            unix = mjd - 40587 * 86400
-            cls.data[i]["event_utc"] = int(unix)
-                    
+    def get_end_utc(cls):
+        max = float('-inf')
+        for event in cls.data:
+            if (event["event_utc"] > max):
+                max = event["event_utc"]
+        return max
+    
     @classmethod
     def get_umbra_utc(cls):
         umbra = {

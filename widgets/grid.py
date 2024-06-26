@@ -3,9 +3,25 @@ from datetime import datetime, timedelta
 
 from read_json import ReadJson
 ReadJson.read_json()
-ReadJson.get_event_utc()
 
-# Global variables
+################################################################################
+# HELPER FUNCTIONS
+
+# Round down to the nearest 30 minutes
+def nearest_30_min(dt):
+    # return dt - timedelta(minutes=dt.minute % 30, seconds=dt.second, microseconds=dt.microsecond)
+    return dt - (dt - datetime.min) % timedelta(minutes=30)
+
+# Returns x position given unix time
+def unix_to_x_pos(unix):
+    dt = datetime.fromtimestamp(unix) # convert unix to datetime
+    time_diff = dt - start_time
+    x_pos = header_width + (time_diff.total_seconds() / 60) * (cell_size / (time_increment // 5))
+    return x_pos
+
+################################################################################
+# GLOBAL VARIABLES
+
 # Custom row and column dimensions
 cell_size = 20 # default
 header_width = 110
@@ -18,17 +34,17 @@ date_y = map_height
 time_y = map_height + date_height
 events_y = map_height + date_height + time_height
 
-########################################
 # save start and end time from json file
-start_time = 0
-end_time = 0
-########################################
+start_time = nearest_30_min(datetime.fromtimestamp(ReadJson.get_start_utc()))
+end_time = datetime.fromtimestamp(ReadJson.get_end_utc())
+time_increment = 30 # 30 minute increments
 
 # Initial grid size
 num_rows = 7
 num_cols = 40
 max_x = header_width + num_cols * cell_size
 max_y = events_y + num_rows * cell_size
+################################################################################
 
 class Grid:
     def __init__(self, master):
@@ -79,41 +95,35 @@ class Grid:
             self.canvas.create_text(header_width/2, gs_start + cell_size*i, text=gs_names[i], fill="white")
 
         # Fill in data
-        colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange"]
-        for row in range(num_rows):  # iterate through rows
-            cell_color = colors[row]
-            for col in range(num_cols):  # iterate through columns
-                #cell_color = "white"
-                x0 = header_width + col * 20  # Starting x-coordinate for the cell
-                y0 = events_y + row * 20  # Starting y-coordinate for the cell
-                x1 = x0 + 20  # Ending x-coordinate for the cell
-                y1 = y0 + 20  # Ending y-coordinate for the cell
-                self.canvas.create_rectangle(x0, y0, x1, y1, fill=cell_color)
+        # colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange"]
+        # for row in range(num_rows):  # iterate through rows
+        #     cell_color = colors[row]
+        #     for col in range(num_cols):  # iterate through columns
+        #         #cell_color = "white"
+        #         x0 = header_width + col * 20  # Starting x-coordinate for the cell
+        #         y0 = events_y + row * 20  # Starting y-coordinate for the cell
+        #         x1 = x0 + 20  # Ending x-coordinate for the cell
+        #         y1 = y0 + 20  # Ending y-coordinate for the cell
+        #         self.canvas.create_rectangle(x0, y0, x1, y1, fill=cell_color)
         
         # Adjust scroll region based on the actual size of the grid, remove for infinite scroll
         self.canvas.config(scrollregion=self.canvas.bbox("all"))
 
     def populate_data(self):
-        # Plot starting date and time
-        # start_datetime = datetime.fromisoformat(data[0]["utc"][:-1])
-        # rounded_time = start_datetime - (start_datetime - datetime.min) % timedelta(minutes=30) # round down to nearest 30 min
-        # self.canvas.create_text(header_width, date_y + date_height/2, text=rounded_time.strftime('%Y-%m-%d'), fill="white", angle=90)
-        # self.canvas.create_text(header_width, time_y + time_height/2, text=rounded_time.strftime('%H:%M:%S'), fill="white", angle=90)
-
+        # UTC Date and Time
+        self.canvas.create_text(header_width, date_y + date_height/2, text=start_time.strftime('%Y-%m-%d'), fill="white", angle=90)
+        self.canvas.create_text(header_width, time_y + time_height/2, text=start_time.strftime('%H:%M:%S'), fill="white", angle=90)
         # Label every 30 minute increment
-        # increment = 30
-        # for i in range(0, max_x//cell_size, increment//5):
-        #     self.canvas.create_text(header_width + i*cell_size, time_y + time_height/2, text=rounded_time.strftime('%H:%M:%S'), fill="white", angle=90) 
-        #     rounded_time = rounded_time + timedelta(minutes=increment)
+        time_counter = start_time
+        for i in range(0, max_x//cell_size, time_increment//5):
+            self.canvas.create_text(header_width + i*cell_size, time_y + time_height/2, text=time_counter.strftime('%H:%M:%S'), fill="white", angle=90) 
+            time_counter = time_counter + timedelta(minutes=time_increment)
         
         # Populate umbra events
-        umbra = ReadJson.get_umbra_utc()
-        print(umbra["in"][0])
-
-        # for contact in data:
-        #     utc = contact['utc']
-        #     hst = contact['hst']
-        #     gs_id = contact['GS id']
-        #     orbital_events = contact['orbital events']
-        #     self.canvas.create_text(100, 100, text=f"{utc}, {hst}, {gs_id}, {orbital_events}", fill="white")
+        umbra_times = ReadJson.get_umbra_utc()
+        for umbra_time in umbra_times["in"]:
+            x_position = unix_to_x_pos(umbra_time)
+            self.canvas.create_rectangle(x_position + 1, events_y + 1, x_position + 50, events_y + cell_size - 1, fill="gray")            
         
+
+

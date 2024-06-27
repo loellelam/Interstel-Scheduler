@@ -39,7 +39,7 @@ end_time = datetime.fromtimestamp(ReadJson.get_end_utc())
 time_increment = 30 # 30 minute increments
 
 # Initial grid size
-num_rows = 7
+num_rows = len(ReadJson.getEventName()) + 2
 num_cols = (int((end_time - start_time).total_seconds() / 60) // 5) + 1 # the number of 5-min increments
 max_x = header_width + num_cols * cell_size
 max_y = events_y + num_rows * cell_size
@@ -65,12 +65,12 @@ class Grid:
         self.canvas.create_line(0, events_y, max_x, events_y, fill="gray") # events
         self.canvas.create_line(header_width, 0, header_width, max_y, fill="gray") # header column
 
-        # Create rows
+        # Create row lines
         for i in range(0, num_rows + 1): # +1 to draw the last line
             y = events_y + i * cell_size
             self.canvas.create_line(0, y, max_x, y, fill="gray")
    
-        # Create columns
+        # Create column lines
         for i in range(0, num_cols + 1): # +1 to draw the last line
             x = header_width + i * cell_size
             self.canvas.create_line(x, events_y, x, max_y, fill="gray")
@@ -83,26 +83,12 @@ class Grid:
         self.canvas.create_text(header_width/2, events_y + cell_size/2, text="Umbra", fill="white")
         self.canvas.create_text(header_width/2, events_y + cell_size*1.5, text="Orbital Events", fill="white")
 
-        # create empty list for gs names
-        name_list = []
-        # fill in list with gs names
-        gs_names = ReadJson.getEventName(name_list)
+        # Fill in the ground station headers
+        gs_names = ReadJson.getEventName() # fill in list with gs names
 
         gs_start = events_y + cell_size * 2.5 # .5 to vertically center text
         for i in range(len(gs_names)):
             self.canvas.create_text(header_width/2, gs_start + cell_size*i, text=gs_names[i], fill="white")
-
-        # Fill in data
-        # colors = ["gray", "white", "red", "orange", "yellow", "green", "blue", "purple", "red", "orange"]
-        # for row in range(num_rows):  # iterate through rows
-        #     cell_color = colors[row]
-        #     for col in range(num_cols):  # iterate through columns
-        #         #cell_color = "white"
-        #         x0 = header_width + col * 20  # Starting x-coordinate for the cell
-        #         y0 = events_y + row * 20  # Starting y-coordinate for the cell
-        #         x1 = x0 + 20  # Ending x-coordinate for the cell
-        #         y1 = y0 + 20  # Ending y-coordinate for the cell
-        #         self.canvas.create_rectangle(x0, y0, x1, y1, fill=cell_color)
         
         # Adjust scroll region based on the actual size of the grid, remove for infinite scroll
         self.canvas.config(scrollregion=self.canvas.bbox("all"))

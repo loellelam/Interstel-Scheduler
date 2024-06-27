@@ -68,15 +68,10 @@ class ReadJson:
         return max
     
     @classmethod
-    def getEventName(list):
-        # open JSON file
-        file = open('data.json')
-
-        # return JSON object as a dictionary
-        data = json.load(file)
-
+    def getEventName(cls):
+        list = []
         # iterate through JSON file
-        for i in data:
+        for i in cls.data:
             # read in event name
             event_name = i['event_name']
             # save elements of event name in list
@@ -90,9 +85,6 @@ class ReadJson:
 
         # print list of event names
         print(list)
-
-        # close JSON file
-        file.close()
 
         # return list of event names
         return list

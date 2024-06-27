@@ -44,16 +44,6 @@ class ReadJson:
         # close json file
         file.close()
 
-        # # return list of gs ids
-        # return list
-
-        # # read in gs-id
-        # # check if gs-id has been saved before or not
-        # # if new gs-id, save as new one in list/vector idk(?)
-        # # if not, bring up saved gs-id from list/vector(?)
-
-        # # finding length of time: find where each AOS0 starts
-
         # Convert all MJD to unix time
         for i, event in enumerate(cls.data):
             mjd = event["event_utc"]  
@@ -77,7 +67,7 @@ class ReadJson:
                 max = event["event_utc"]
         return max
     
-    
+    @classmethod
     def getEventName(list):
         # open JSON file
         file = open('data.json')
@@ -108,6 +98,7 @@ class ReadJson:
         return list
     
     # find aos/los pairs
+    @classmethod
     def findPairs():
         # initialize list to hold aos/los pairs
         pairs = []

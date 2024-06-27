@@ -1,6 +1,17 @@
 from datetime import datetime
 from datetime import timezone
+from collections import namedtuple
 import json
+
+class Event:
+    def __init__(self):
+        self.event_flag = -1
+        self.event_name = ""
+        self.event_type = -1
+        self.event_utc = -1
+        self.start_time = -1
+        self.end_time = -1
+        self.max_time = -1
 
 class ReadJson:
     data = []
@@ -27,7 +38,7 @@ class ReadJson:
         #     if gs_id not in list:
         #         list.append(gs_id)
 
-        # # print list of gs ids
+        # print list of gs ids
         # print(list)
         
         # close json file
@@ -48,10 +59,6 @@ class ReadJson:
             mjd = event["event_utc"]  
             unix = (mjd - 40587) * 86400
             cls.data[i]["event_utc"] = float(unix)
-    
-    @classmethod
-    def getEventName():
-        return        
 
     @classmethod
     def get_start_utc(cls):
@@ -70,6 +77,115 @@ class ReadJson:
                 max = event["event_utc"]
         return max
     
+    
+    def getEventName(list):
+        # open JSON file
+        file = open('data.json')
+
+        # return JSON object as a dictionary
+        data = json.load(file)
+
+        # iterate through JSON file
+        for i in data:
+            # read in event name
+            event_name = i['event_name']
+            # save elements of event name in list
+            name = event_name.split("_", 1)
+
+            if (name[0] != "UMBRAIN" and name[0] != "UMBRAOUT"):
+                # check if new event name
+                # if new, add to list
+                if name[1] not in list:
+                    list.append(name[1])
+
+        # print list of event names
+        print(list)
+
+        # close JSON file
+        file.close()
+
+        # return list of event names
+        return list
+    
+    # find aos/los pairs
+    def findPairs():
+        # initialize list to hold aos/los pairs
+        pairs = []
+
+        # define named tuple to hold the events
+        Event = namedtuple('Event', ['name', 'AOS', 'MAX', 'LOS'])
+
+        # open JSON file
+        file = open('data.json')
+
+        # return JSON object as a dictionary
+        data = json.load(file)
+
+        # iterate through JSON file
+        # find pairs (umbra in, umbra out)/(aos, los)
+        for i in data:
+            # read in event name
+            event_name = i['event_name']
+
+            # look for starting aos
+            if'AOS' in event_name:
+                print("AOS: " + event_name)
+
+                # find and save location of event
+                name = event_name.split("_", 1)
+                name = name[1]
+                print("AOS name: " + name)
+
+                # create new event and save it's AOS
+                E = Event(name, i['event_utc'], None, None)
+                # add event into pairs list
+                pairs.append(E)
+                print(E)
+                print()
+
+            # look for ending los
+            if 'LOS' in event_name:
+                # find and save location of event
+                name = event_name.split("_", 1)
+                name = name[1]
+                print("LOS name: " + name)
+
+                for index, event in enumerate(pairs):
+                    if event.name == name and event.LOS is None:
+                        pairs[index] = event._replace(LOS = i['event_utc'])
+                        print(pairs[index])
+                        break
+
+                print()
+                # print("LOS: " + event_name)
+
+            # look for max
+            if 'MAX' in event_name:
+                print()
+                # print("MAX: " + event_name)
+
+            # once aos found, find the event name
+
+        # create named tuples for events
+
+        # find umbra pairs
+
+        print(pairs)
+
+        # close JSON file
+        file.close()
+
+        # return list of aos/los pairs
+        return pairs
+    
+    # from loelle's work
+    @classmethod
+    def get_event_utc(cls):
+        for i, event in enumerate(cls.data):
+            mjd = event["event_utc"]  
+            unix = mjd - 40587 * 86400
+            cls.data[i]["event_utc"] = int(unix)
+                    
     @classmethod
     def get_umbra_utc(cls):
         umbra = {

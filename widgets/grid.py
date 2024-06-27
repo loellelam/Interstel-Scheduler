@@ -88,7 +88,8 @@ class Grid:
         # create empty list for gs names
         name_list = []
         # fill in list with gs names
-        # gs_names = read_json(name_list)
+        gs_names = ReadJson.getEventName(name_list)
+
         gs_start = events_y + cell_size * 2.5 # .5 to vertically center text
         for i in range(len(gs_names)):
             self.canvas.create_text(header_width/2, gs_start + cell_size*i, text=gs_names[i], fill="white")

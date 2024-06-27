@@ -83,8 +83,6 @@ class Grid:
         self.canvas.create_text(header_width/2, events_y + cell_size/2, text="Umbra", fill="white")
         self.canvas.create_text(header_width/2, events_y + cell_size*1.5, text="Orbital Events", fill="white")
 
-        # Fill in the ground station headers
-        gs_names = ["MC3-NPS", "MC3-PCH", "KSAT-PA", "KSAT-PL", "KSAT-NZ"]
         # create empty list for gs names
         name_list = []
         # fill in list with gs names

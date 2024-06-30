@@ -111,3 +111,12 @@ class Grid:
             start = unix_to_x_pos(umbra_times["in"][i])
             end = unix_to_x_pos(umbra_times["out"][i])
             self.canvas.create_rectangle(start + 1, events_y + 1, end - 1, events_y + cell_size - 1, fill="gray")
+
+        ###### ADD IN CODE TO FILL IN THE ROWS ######
+
+        # populate target and ground station events
+        pairs = ReadJson.findPairs()
+        for i in range(0, len(pairs)):
+            start = unix_to_x_pos(pairs[i].AOS)
+            end = unix_to_x_pos(pairs[i].LOS)
+            self.canvas.create_rectangle(start + 1, events_y + 1 + cell_size, end - 1, events_y + (cell_size * 2) - 1, fill="red")

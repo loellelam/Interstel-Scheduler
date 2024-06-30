@@ -17,7 +17,7 @@ def main():
     root.mainloop()
 
     ##############################TESTING METHOD################################
-    ReadJson.findPairs()
+    # ReadJson.findPairs()
 
 if __name__ == "__main__":
     main()

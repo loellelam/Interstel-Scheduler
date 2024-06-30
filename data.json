@@ -3,7 +3,7 @@
       "event_flag": 0,
       "event_name": "TAOS_CONUS",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 497196.01394570433,
           "lat": 0.64009623604791088,
@@ -14,7 +14,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target0",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 497196.01394570433,
           "lat": 0.64009623604791088,
@@ -25,7 +25,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target1",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 497196.01394570433,
           "lat": 0.64009623604791088,
@@ -36,7 +36,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target2",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 497196.01394570433,
           "lat": 0.64009623604791088,
@@ -47,7 +47,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target3",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 497196.01394570433,
           "lat": 0.64009623604791088,
@@ -58,7 +58,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target4",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 497196.01394570433,
           "lat": 0.64009623604791088,
@@ -146,7 +146,7 @@
       "event_flag": 0,
       "event_name": "GSAOS_Punta_Arenas",
       "event_type": 5120,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 544053.94002964627,
           "lat": -1.3037988431961325,
@@ -157,7 +157,7 @@
       "event_flag": 0,
       "event_name": "GS5AOS_Punta_Arenas",
       "event_type": 5121,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 541636.38943345565,
           "lat": -1.2464468448229904,
@@ -212,7 +212,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target0",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 495491.90872031916,
           "lat": 0.39065580600851862,
@@ -223,7 +223,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target1",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 495491.90872031916,
           "lat": 0.39065580600851862,
@@ -234,7 +234,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target3",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 495491.90872031916,
           "lat": 0.39065580600851862,
@@ -245,7 +245,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target2",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 495569.05776427314,
           "lat": 0.42281703422830536,
@@ -256,7 +256,7 @@
       "event_flag": 0,
       "event_name": "TAOS_target4",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 495736.293978028,
           "lat": 0.46455835843979348,
@@ -267,7 +267,7 @@
       "event_flag": 0,
       "event_name": "TAOS_CONUS",
       "event_type": 6144,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 496223.59102386888,
           "lat": 0.54031354349036997,
@@ -344,7 +344,7 @@
       "event_flag": 0,
       "event_name": "GSAOS_Svalbard",
       "event_type": 5120,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 511215.17924826965,
           "lat": 1.3164499655417587,
@@ -388,7 +388,7 @@
       "event_flag": 0,
       "event_name": "GSAOS_Punta_Arenas",
       "event_type": 5120,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 545223.12139510177,
           "lat": -1.3164743604602618,
@@ -432,7 +432,7 @@
       "event_flag": 0,
       "event_name": "GSAOS_Svalbard",
       "event_type": 5120,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 510132.79806367867,
           "lat": 1.3045509218347242,
@@ -443,7 +443,7 @@
       "event_flag": 0,
       "event_name": "GS5AOS_Svalbard",
       "event_type": 5121,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 511592.84630955197,
           "lat": 1.3145554483394752,
@@ -454,7 +454,7 @@
       "event_flag": 0,
       "event_name": "GS10AOS_Svalbard",
       "event_type": 5122,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 513164.87087118812,
           "lat": 1.2625044689970599,
@@ -509,7 +509,7 @@
       "event_flag": 0,
       "event_name": "GSAOS_Puertollano",
       "event_type": 5120,
-      "event_utc": 0,
+      "event_utc": 60107.010011574079,
       "geodpos": {
           "h": 516508.3701876523,
           "lat": 0.7848180143010941,

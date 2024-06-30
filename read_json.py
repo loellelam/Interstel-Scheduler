@@ -83,30 +83,21 @@ class ReadJson:
                 if name[1] not in list:
                     list.append(name[1])
 
-        # print list of event names
-        print(list)
-
         # return list of event names
         return list
     
     # find aos/los pairs
     @classmethod
-    def findPairs():
+    def findPairs(cls):
         # initialize list to hold aos/los pairs
         pairs = []
 
         # define named tuple to hold the events
         Event = namedtuple('Event', ['name', 'AOS', 'MAX', 'LOS'])
 
-        # open JSON file
-        file = open('data.json')
-
-        # return JSON object as a dictionary
-        data = json.load(file)
-
         # iterate through JSON file
         # find pairs (umbra in, umbra out)/(aos, los)
-        for i in data:
+        for i in cls.data:
             # read in event name
             event_name = i['event_name']
 
@@ -149,14 +140,7 @@ class ReadJson:
 
             # once aos found, find the event name
 
-        # create named tuples for events
-
-        # find umbra pairs
-
         print(pairs)
-
-        # close JSON file
-        file.close()
 
         # return list of aos/los pairs
         return pairs

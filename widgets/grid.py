@@ -43,6 +43,9 @@ num_rows = len(ReadJson.getEventName()) + 2
 num_cols = (int((end_time - start_time).total_seconds() / 60) // 5) + 1 # the number of 5-min increments
 max_x = header_width + num_cols * cell_size
 max_y = events_y + num_rows * cell_size
+
+# dictionary to hold row #s for each gs name
+gs_name_dict = {}
 ################################################################################
 
 class Grid:
@@ -86,6 +89,14 @@ class Grid:
         # Fill in the ground station headers
         gs_names = ReadJson.getEventName() # fill in list with gs names
 
+        # create dictionary to hold row #s for each gs name
+        # gs names start at row 3
+        row = 3
+        for name in gs_names:
+            gs_name_dict[name] = row
+            row = row + 1
+        print(gs_name_dict)
+
         gs_start = events_y + cell_size * 2.5 # .5 to vertically center text
         for i in range(len(gs_names)):
             self.canvas.create_text(header_width/2, gs_start + cell_size*i, text=gs_names[i], fill="white")
@@ -117,6 +128,8 @@ class Grid:
         # populate target and ground station events
         pairs = ReadJson.findPairs()
         for i in range(0, len(pairs)):
+            # holds the row the event is in
+            rowNum = gs_name_dict[pairs[i].name]
             start = unix_to_x_pos(pairs[i].AOS)
             end = unix_to_x_pos(pairs[i].LOS)
-            self.canvas.create_rectangle(start + 1, events_y + 1 + cell_size, end - 1, events_y + (cell_size * 2) - 1, fill="red")
+            self.canvas.create_rectangle(start + 1, events_y + 1 + (cell_size * (rowNum - 1) ), end - 1, events_y + (cell_size * rowNum) - 1, fill="red")

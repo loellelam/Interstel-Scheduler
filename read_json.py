@@ -23,23 +23,6 @@ class ReadJson:
 
         # return JSON object as a dictionary
         cls.data = json.load(file)
-
-        # for i in data:
-        #     utc = i['utc']
-        #     date = datetime.fromisoformat(utc[:-1]).astimezone(timezone.utc)
-        #     # print(date)
-
-        #     gs_id = i['gs-id']
-        #     # print(gs_id)
-
-        #     orb_event = i['orbital-event']
-        #     # print(orb_event)
-
-        #     if gs_id not in list:
-        #         list.append(gs_id)
-
-        # print list of gs ids
-        # print(list)
         
         # close json file
         file.close()
@@ -131,12 +114,21 @@ class ReadJson:
                         break
 
                 print()
-                # print("LOS: " + event_name)
 
             # look for max
             if 'MAX' in event_name:
+                # find and save location of event
+                name = event_name.split("_", 1)
+                name = name[1]
+                print("MAX name: " + name)
+
+                for index, event in enumerate(pairs):
+                    if event.name == name and event.MAX is None:
+                        pairs[index] = event._replace(MAX = i['event_utc'])
+                        print(pairs[index])
+                        break
+
                 print()
-                # print("MAX: " + event_name)
 
             # once aos found, find the event name
 

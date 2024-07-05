@@ -443,7 +443,7 @@
       "event_flag": 0,
       "event_name": "GS5AOS_Svalbard",
       "event_type": 5121,
-      "event_utc": 60107.110011574079,
+      "event_utc": 60107.120011574079,
       "geodpos": {
           "h": 511592.84630955197,
           "lat": 1.3145554483394752,
@@ -454,7 +454,7 @@
       "event_flag": 0,
       "event_name": "GS10AOS_Svalbard",
       "event_type": 5122,
-      "event_utc": 60107.110011574079,
+      "event_utc": 60107.130011574079,
       "geodpos": {
           "h": 513164.87087118812,
           "lat": 1.2625044689970599,

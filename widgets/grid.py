@@ -132,4 +132,4 @@ class Grid:
             rowNum = gs_name_dict[pairs[i].name]
             start = unix_to_x_pos(pairs[i].AOS)
             end = unix_to_x_pos(pairs[i].LOS)
-            self.canvas.create_rectangle(start + 1, events_y + 1 + (cell_size * (rowNum - 1) ), end - 1, events_y + (cell_size * rowNum) - 1, fill="cyan", outline="")
+            self.canvas.create_rectangle(start + 1, events_y + 1 + (cell_size * (rowNum - 1) ), end - 1, events_y + (cell_size * rowNum) - 1, fill="cyan")

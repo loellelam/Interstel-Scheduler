@@ -84,6 +84,12 @@ class ReadJson:
             # read in event name
             event_name = i['event_name']
 
+            # look for angle in event name
+            # if angle exists, save
+            numbers = [int(char) for char in event_name if char.isdigit()]
+            if numbers:
+                print(numbers)
+
             # look for starting aos
             if'AOS' in event_name:
                 print("AOS: " + event_name)

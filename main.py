@@ -4,6 +4,7 @@ from widgets.grid import Grid
 
 from read_json import ReadJson
 
+
 def main():
     # Initialize Tk class
     root = tk.Tk()
